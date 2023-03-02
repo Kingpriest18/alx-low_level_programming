@@ -1,19 +1,19 @@
-#include "holberton.h"
+#include "coding.h"
+
 /**
- * print_alphabet - Entry point
+ * print_alphabet - check the code for Coding School students.
  *
- * Return: Always 0 (Success)
+ * Description: Print lower case alphabet from a - z
+ * using a for loop.
+ * Return: Always 1.
  */
 void print_alphabet(void)
 {
-	int alpha;
+	int i;
 
-	alpha = 'a';
-
-	while (alpha <= 'z')
+	for (i = 'a'; i <= 'z'; i++)
 	{
-		_putchar(alpha);
-		alpha++;
+		_putchar(i);
 	}
 	_putchar('\n');
 }

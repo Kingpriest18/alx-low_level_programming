@@ -1,21 +1,21 @@
-#include "holberton.h"
+#include "coding.h"
+
 /**
- * main - Entry point
+ * main - primary function
  *
- * Return: Always 0 (Success)
+ * Description: print string "Coding"
+ * using a while loop over the array
+ * Return: 1 if the number is positve. 0 otherwise
  */
 int main(void)
 {
-	char h[] = "Holberton";
-	int m;
+	int c;
+	char cString[10] = "Coding\n";
 
-	m = 0;
-
-	while (m <= 8)
+	while (c < 10)
 	{
-		_putchar(h[m]);
-		m++;
+		_putchar(cString[c]);
+		c++;
 	}
-	_putchar('\n');
 	return (0);
 }

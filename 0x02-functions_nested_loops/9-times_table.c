@@ -1,41 +1,35 @@
-#include "holberton.h"
+#include "coding.h"
+
 /**
- * times_table - prints the 9 times table
+ * times_table - function without parameter
  *
- * Return: 9 times table
+ * Description: using for loops to create table and multiples
+ * Return: result
  */
 void times_table(void)
 {
-	int a, b, mult;
+	int i, j, result;
 
-	for (a = 0 ; a <= 9 ; a++)
+	for (i = 0; i <= 9; i++)
 	{
-		for (b = 0 ; b <= 9 ; b++)
+		_putchar('0');
+		for (j = 1; j <= 9; j++)
 		{
-			mult = a * b;
-
-			if (mult <= 9)
-			{
-				if (b != 0)
-				{
-					_putchar(' ');
-				}
-				_putchar(mult + '0');
-			}
-			else
-			{
-				_putchar(mult / 10 + '0');
-				_putchar(mult % 10 + '0');
-			}
-			if (b != 9)
+			result = i * j;
+			if (result < 10)
 			{
 				_putchar(',');
 				_putchar(' ');
-			}
-			else
+				_putchar(' ');
+				_putchar(result + '0');
+			} else if (result >= 10)
 			{
-				_putchar('\n');
+				_putchar(',');
+				_putchar(' ');
+				_putchar(result / 10 + '0');
+				_putchar(result % 10 + '0');
 			}
 		}
+		_putchar('\n');
 	}
 }

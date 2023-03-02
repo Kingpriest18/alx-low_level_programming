@@ -1,15 +1,17 @@
-#include "holberton.h"
+#include "coding.h"
+
 /**
- * add - the adition of two integers
- * @a: a integer 1
- * @b: a integer 2
+ * add - to add two integers and return the result
+ * @num1: for operand number one
+ * @num2: for operand number two
  *
- * Return: the result of the adition of two integers
+ * Description: result integer variable is sum of num1 and num2
+ * Return: result
  */
-int add(int a, int b)
+int add(int num1, int num2)
 {
 	int result;
 
-	result = a + b;
+	result = num1 + num2;
 	return (result);
 }

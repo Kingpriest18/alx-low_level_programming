@@ -1,18 +1,18 @@
+#include <stdlib.h>
 #include <stdio.h>
+
 /**
  * main - Entry point
- *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int numb;
+	int i;
 
-	for (numb = '0' ; numb <= '9' ; numb++)
+	for (i = '0'; i <= '9'; i++)
 	{
-		putchar(numb);
-
-		if (numb != '9')
+		putchar(i);
+		if (i < '9')
 		{
 			putchar(',');
 			putchar(' ');

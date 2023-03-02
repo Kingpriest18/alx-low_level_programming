@@ -1,22 +1,23 @@
+#include <stdlib.h>
 #include <stdio.h>
+
 /**
  * main - Entry point
- *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int n;
-	int m;
+	int i;
+	int j;
 
-	for (n = 48 ; n <= 57 ; n++)
+	for (i = '0'; i <= '9'; i++)
 	{
-		for (m = 48 ; m <= 57 ; m++)
+		for (j = '0'; j <= '9'; j++)
 		{
-			putchar(n);
-			putchar(m);
+			putchar(i);
+			putchar(j);
 
-			if ((n != 57) || (m != 57))
+			if (j < '9' || i < '9')
 			{
 				putchar(',');
 				putchar(' ');
