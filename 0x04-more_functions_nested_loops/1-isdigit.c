@@ -1,18 +1,15 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * _isdigit - checks for a digit
- * @c: the parameter to print
+ * _isdigit - checks for digithood
+ * @c: character to checked for digit membership
  *
- * Return: 1 or 0
+ * Return: 1 if digit, 0 if not digit
  */
+
 int _isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
-	{
+	if (c >= '0' && c <= '9')
 		return (1);
-	}
-	else
-	{
-		return (0);
-	}
+	return (0);
 }

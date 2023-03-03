@@ -1,24 +1,28 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * print_diagonal -draws a diagonal line on the terminal
- * @n: the number of times that the special character must be print
+ * print_diagonal - draws diagonal line
+ * @n: number of times
  *
- * Return: a diagonal
+ * Return: void
  */
+
 void print_diagonal(int n)
 {
-	int a, b;
+	int line = 0;
+	int spaces;
 
 	if (n > 0)
 	{
-		for (a = 0 ; a < n ; a++)
+		while (line < n)
 		{
-			for (b = 0 ; b < a ; b++)
+			for (spaces = 0; spaces < line; spaces++)
 			{
 				_putchar(' ');
 			}
-			_putchar(92);
+			_putchar('\\');
 			_putchar('\n');
+			line++;
 		}
 	}
 	else

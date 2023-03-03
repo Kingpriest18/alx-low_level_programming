@@ -1,48 +1,75 @@
-#include <stdlib.h>
 #include "dog.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 /**
- * new_dog - new dog
- * @name: name's dog
- * @age: age's dog
- * @owner: owner's dog
- *
- * Return: a pointer with the new structure
+ * _strdup - returns a pointer to a newly allocated space in memory
+ * @str: string
+ * Return: pointer to newly allocated space in memory
  */
+
+char *_strdup(char *str)
+{
+	int length, i;
+	char *arr;
+
+	if (str == NULL)
+	{
+		return (NULL);
+	}
+
+	length = 0;
+	while (*(str + length) != '\0')
+	{
+		length++;
+	}
+
+	arr = (char*) malloc(length * sizeof(char) + 1);
+	if (arr == NULL)
+		return (NULL);
+
+	for (i = 0; i < length; i++)
+	{
+		arr[i] = str[i];
+	}
+	arr[i] = '\0';
+
+	return (arr);
+}
+
+/**
+ * new_dog - creates a new dog
+ * @name: doggo's name
+ * @age: doggo's age
+ * @owner: doggo's owner
+ * Return: new_dog (dog_t)
+ */
+
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_dog;
-	int i, new_name, new_owner;
+	dog_t *doggo;
+	char *doggo_name, *doggo_owner;
 
-	new_dog = malloc(sizeof(dog_t));
-	if (new_dog == NULL || !name || !owner)
+	doggo = malloc(sizeof(dog_t));
+	if (doggo == NULL)
+		return (NULL);
+
+	doggo_name = _strdup(name);
+	if (doggo_name == NULL)
 	{
-		free(new_dog);
+		free(doggo);
 		return (NULL);
 	}
 
-	for (new_name = 0 ; name[new_name] ; new_name++)
-		;
-	for (new_owner = 0 ; owner[new_owner] ; new_owner++)
-		;
-
-	new_dog->name = malloc(new_name + 1);
-	new_dog->owner = malloc(new_owner + 1);
-
-	if (!new_dog->name || !new_dog->owner)
+	doggo_owner = _strdup(owner);
+	if (doggo_owner == NULL)
 	{
-		free(new_dog->owner);
-		free(new_dog->name);
-		free(new_dog);
+		free(doggo_name);
+		free(doggo);
 		return (NULL);
 	}
-
-	for (i = 0 ; i < new_name ; i++)
-		new_dog->name[i] = name[i];
-	new_dog->name[i] = '\0';
-	new_dog->age = age;
-
-	for (i = 0 ; i < new_owner ; i++)
-		new_dog->owner[i] = owner[i];
-	new_dog->owner[i] = '\0';
-	return (new_dog);
+	doggo->name = doggo_name;
+	doggo->age = age;
+	doggo->owner = doggo_owner;
+	return (doggo);
 }

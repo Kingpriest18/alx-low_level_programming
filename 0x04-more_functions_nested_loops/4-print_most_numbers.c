@@ -1,19 +1,19 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * print_most_numbers - prints the numbers interleaved
+ * print_most_numbers - prints numbers 0-9 except 2,4
  *
- * Return: numbers
+ * Return: void
  */
+
 void print_most_numbers(void)
 {
-	int numb;
+	int c;
 
-	for (numb = 48 ; numb <= 57 ; numb++)
+	for (c = '0'; c <= '9'; c++)
 	{
-		if (numb != 50 && numb != 52)
-		{
-			_putchar(numb);
-		}
+		if (c != '2' && c != '4')
+			_putchar(c);
 	}
 	_putchar('\n');
 }

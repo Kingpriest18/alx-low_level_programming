@@ -1,45 +1,49 @@
-#include "holberton.h"
-/**
- * append_text_to_file - appends text at the end of a file
- * @filename: name of the file
- * @text_content: string to write to the file
- *
- * Return: 1 on Success or -1 on Failure
- */
-int append_text_to_file(const char *filename, char *text_content)
-{
-	int filed, i;
+#include "main.h"
 
-	if (text_content == NULL)
+/**
+ * _strlen - returns length of string
+ * @s: string
+ * Return: length of string
+ */
+
+int _strlen(char *s)
+{
+	int len = 0;
+
+	while (s[len] != '\0')
 	{
-		text_content = "";
+		len++;
 	}
 
-	for (i = 0 ; text_content[i] != '\0' ; i++)
-		;
+	return (len);
+}
 
-	filed = open(filename, O_WRONLY | O_APPEND);
 
-	if (filed == -1)
-		return (-1);
+/**
+ * append_text_to_file - appends a text at the end of a file
+ * @filename: name of file
+ * @text_content: text
+ * Return: 1 - success, -1 error
+ */
 
-	write(filed, text_content, i);
-
-	close(filed);
-	return (1);
+int append_text_to_file(const char *filename, char *text_content)
+{
+	int fd;
+	unsigned int length;
+	ssize_t bytes_written;
 
 	if (filename == NULL)
 		return (-1);
-
 	if (text_content == NULL)
-	{
-		if (filename != NULL)
-		{
-			return (1);
-		}
-		else
-		{
-			return (-1);
-		}
-	}
+		return (1);
+	fd = open(filename, O_WRONLY | O_APPEND);
+	if (fd == -1)
+		return (-1);
+	length = _strlen(text_content);
+
+	bytes_written = write(fd, text_content, length);
+	if (bytes_written == -1)
+		return (-1);
+	close(fd);
+	return (1);
 }

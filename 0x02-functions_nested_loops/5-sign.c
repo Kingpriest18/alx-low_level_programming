@@ -1,13 +1,12 @@
-#include "coding.h"
+#include "main.h"
 
 /**
- * print_sign - with one argument
- * @n: is the input for function
+ * print_sign - prints the sign of a number
+ * @n: n is an integer
  *
- * Description: if/else to check if n is negative
- * zero or positive
- * Return: 1 if greater than 0, 0 if 0, -1 if lesser
+ * Return: 1 (if positive), 0 (if zero), -1 (if negative)
  */
+
 int print_sign(int n)
 {
 	if (n > 0)
@@ -21,6 +20,8 @@ int print_sign(int n)
 		return (-1);
 	}
 	else
+	{
 		_putchar('0');
 		return (0);
+	}
 }

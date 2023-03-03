@@ -1,16 +1,16 @@
-global main
+section .text
+	global main
 
-	section .text
 main:
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, message
-	mov rdx, 17
-	syscall
+	mov	edx, len
+	mov	ecx, msg	;message variable
+	mov 	ebx, 1		;write to standard output
+	mov	eax, 4
+	int	0x80		;call kernel
 
-	mov eax, 60
-	xor rdi, rdi
-	syscall
+	mov	eax, 1 		;system call (sys_exit)
+	int	0x80		;call kernel
 
-message:
-	db "Hello, Holberton", 10 ; 10 is the ASCII code for a new line
+section .data
+msg db 'Hello, Coding', 0xa	;message to print
+len equ $ - msg			;length of the string

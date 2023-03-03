@@ -1,37 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
-#include "variadic_functions.h"
+
 /**
- * print_strings - print strings
- * @separator: string between the strings
- * @n: number of parameters received
- *
+ * print_strings - Print out all given strings
+ * @separator: String to print between other strings
+ * @n: Number of strings being printed
  */
 void print_strings(const char *separator, const unsigned int n, ...)
 {
+	va_list words;
+	char *word;
 	unsigned int i;
-	char *str;
 
-	va_list strings;
-
-	va_start(strings, n);
-
-	for (i = 0 ; i < n ; i++)
+	va_start(words, n);
+	i = 0;
+	while (i < n)
 	{
-		str =  va_arg(strings, char *);
-
-		if (str == NULL)
-		{
-			printf("%p", str);
-		}
+		word = va_arg(words, char *);
+		if (word != NULL)
+			printf("%s", word);
 		else
-		{
-			printf("%s", str);
-		}
-		if (separator != NULL && i < n - 1)
-		{
+			printf("(nil)");
+		if (i < n - 1 && separator != NULL)
 			printf("%s", separator);
-		}
+		i++;
 	}
-	va_end(strings);
 	printf("\n");
+	va_end(words);
 }

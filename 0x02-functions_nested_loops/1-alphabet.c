@@ -1,19 +1,19 @@
-#include "coding.h"
+#include "main.h"
 
 /**
- * print_alphabet - check the code for Coding School students.
+ * print_alphabet - print alphabet
  *
- * Description: Print lower case alphabet from a - z
- * using a for loop.
- * Return: Always 1.
+ * Return: void
  */
+
 void print_alphabet(void)
 {
-	int i;
+	char letter = 'a';
 
-	for (i = 'a'; i <= 'z'; i++)
+	while (letter <= 'z')
 	{
-		_putchar(i);
+		_putchar(letter);
+		letter++;
 	}
 	_putchar('\n');
 }

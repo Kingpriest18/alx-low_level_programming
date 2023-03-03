@@ -1,18 +1,20 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * print_line -draws a straight line in the terminal
- * @n: the number of times that the special character must be printed
+ * print_line - prints a line of _ n long
+ * @n: length of line
  *
- * Return: a straight line
+ * Return: void
  */
+
 void print_line(int n)
 {
-	int a = 1;
+	int line = 0;
 
-	while (a <= n)
+	while (line < n)
 	{
-		_putchar(95);
-		a++;
+		_putchar('_');
+		line++;
 	}
 	_putchar('\n');
 }

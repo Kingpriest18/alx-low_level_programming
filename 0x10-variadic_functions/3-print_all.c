@@ -1,79 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
 #include "variadic_functions.h"
-/**
- * print_char - print characters
- * @arguments: input arguments
- */
-void print_char(va_list arguments)
-{
-	printf("%c", va_arg(arguments, int));
-}
-/**
- * print_int - print integers
- * @arguments: input arguments
- */
-void print_int(va_list arguments)
-{
-	printf("%d", va_arg(arguments, int));
-}
-/**
- * print_float - print floats
- * @arguments: input arguments
- */
-void print_float(va_list arguments)
-{
-	printf("%f", va_arg(arguments, double));
-}
-/**
- * print_string - print strings
- * @arguments: input arguments
- */
-void print_string(va_list arguments)
-{
-	char *args = va_arg(arguments, char*);
 
-	if (args == NULL)
-	{
-		printf("%p", args);
-		return;
-	}
-	printf("%s", args);
-}
 /**
- * print_all - prints anything
- * @format: input string
+ * print_string - Print the string
+ * @args: Where the string is
+ */
+void print_string(va_list args)
+{
+	char *string;
+
+	string = va_arg(args, char *);
+	if (string == NULL)
+		string = "(nil)";
+	printf("%s",  string);
+}
+
+/**
+ * print_char - Print the char
+ * @args: Where the char is
+ */
+void print_char(va_list args)
+{
+	printf("%c", va_arg(args, int));
+}
+
+/**
+ * print_int - Print the int
+ * @args: Where the int is
+ */
+void print_int(va_list args)
+{
+	printf("%d", va_arg(args, int));
+}
+
+/**
+ * print_float - Print the float
+ * @args: Where the float is
+ */
+void print_float(va_list args)
+{
+	printf("%f", va_arg(args, double));
+}
+
+/**
+ * print_all - Print any type of given argument
+ * @format: List of types of arguments being passed
  */
 void print_all(const char * const format, ...)
 {
-	simbol_t identifier[] = {
-		{'c', print_char},
-		{'s', print_string},
-		{'f', print_float},
-		{'i', print_int}
+	va_list args;
+	char *sep;
+	print_form_t print_form[] = {
+		{"c", print_char},
+		{"i", print_int},
+		{"f", print_float},
+		{"s", print_string}
 	};
+	int i, j;
 
-	int i = 0, j;
-	char *comma = "";
-
-	va_list arguments;
-
-	va_start(arguments, format);
-
-	while (format && format[i])
+	va_start(args, format);
+	i = 0;
+	sep = "";
+	while (format != NULL && format[i] != '\0')
 	{
 		j = 0;
-
 		while (j < 4)
 		{
-			if (identifier[j].all == format[i])
+			if (*print_form[j].c == format[i])
 			{
-				printf("%s", comma);
-				identifier[j].func(arguments);
-				comma = ", ";
+				printf("%s", sep);
+				print_form[j].f(args, sep);
+				sep = ", ";
 			}
 			j++;
 		}
 		i++;
 	}
 	printf("\n");
-	va_end(arguments);
+	va_end(args);
 }

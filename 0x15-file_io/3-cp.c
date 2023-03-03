@@ -1,50 +1,67 @@
-#include "holberton.h"
-#include <stdio.h>
+#include "main.h"
+#include <stdarg.h>
+
+/**
+ * error_handler - handles errors for cp
+ * @exit_code: exit code
+ * @message: error message
+ * @type: data type for format
+ */
+
+void error_handler(int exit_code, char *message, char type, ...)
+{
+	va_list args;
+
+	va_start(args, type);
+	if (type == 's')
+		dprintf(STDERR_FILENO, message, va_arg(args, char *));
+	else if (type == 'd')
+		dprintf(STDERR_FILENO, message, va_arg(args, int));
+	else if (type == 'N')
+		dprintf(STDERR_FILENO, message, "");
+	else
+		dprintf(STDERR_FILENO, "Error: Does not match any type\n");
+	va_end(args);
+	exit(exit_code);
+}
+
 /**
  * main - copies the content of a file to another file
- * @argv: argument vector
- * @argc: argument count
- * Return: 0 on Success
+ * @argc: number of arguments
+ * @argv: array of arguments
+ * Return:  0 (Always)
  */
+
 int main(int argc, char *argv[])
 {
-	int ff, ft, r, w;
 	char buffer[1024];
+	int fd_s, fd_d;
+	ssize_t bytes_read, bytes_written;
 
 	if (argc != 3)
-	{dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
-	}
+		error_handler(97, "Usage: cp file_from file_to\n", 'N');
 
-	ff = open(argv[1], O_RDONLY);
-	if (ff == -1)
+	fd_s = open(argv[1], O_RDONLY);
+	if (fd_s == -1)
+		error_handler(98, "Error: Can't read from file %s\n", 's', argv[1]);
+
+	fd_d = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (fd_d == -1)
+		error_handler(99, "Error: Can't write to %s\n", 's', argv[2]);
+
+	while ((bytes_read = read(fd_s, buffer, 1024)) > 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
+		bytes_written = write(fd_d, buffer, bytes_read);
+		if (bytes_written == -1)
+			error_handler(99, "Error: Can't write to %s\n", 's', argv[2]);
 	}
 
-	ft = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (ft == -1)
-	{dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
-	}
+	if (bytes_read == -1)
+		error_handler(98, "Error: Can't read from file %s\n", 's', argv[1]);
+	if (close(fd_s) == -1)
+		error_handler(100, "Error: Can't close fd %d\n", 'd', fd_s);
+	if (close(fd_d) == -1)
+		error_handler(100, "Error: Can't close fd %d\n", 'd', fd_d);
 
-	while ((r = read(ff, buffer, 1024)) != 0)
-	{
-		if (r == -1)
-		{dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-			exit(98);
-		}
-		w = write(ft, buffer, r);
-		if (w == -1)
-		{dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
-		}
-	}
-
-	if (close(ff) == -1)
-	{dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", ff), exit(100);
-	}
-	if (close(ft) == -1)
-	{dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", ft), exit(100);
-	}
 	return (0);
 }

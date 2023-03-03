@@ -1,35 +1,50 @@
+
+
 #include <stdio.h>
 
 /**
- * main - Entry point
+ * main - print pairs of double digit combos
  *
- * Description: return all combination of 0 to 99
- * Return: 0
+ * Description: print pairs of double digit combos
+ *
+ * Return: Always 0 (Success)
  */
+
 int main(void)
 {
-	int n, m, d1, d2, d3, d4;
+	int i, j, k, m;
 
-	for (n = 0; n <= 98; n++)
+	i = 48;
+	while (i < 58)
 	{
-		for (m = n + 1; m <= 99; m++)
+		j = 48;
+		while (j < 58)
 		{
-			d1 = n / 10;
-			d2 = n % 10;
-			putchar(d1 + '0');
-			putchar(d2 + '0');
-			putchar(' ');
-			d3 = m / 10;
-			d4 = m % 10;
-			putchar(d3 + '0');
-			putchar(d4 + '0');
-			if (n != 98 || m != 99)
+			m = j + 1;
+			k = i;
+			while (k < 58)
 			{
-				putchar(',');
-				putchar(' ');
+				while (m < 58)
+				{
+					putchar(i);
+					putchar(j);
+					putchar(32);
+					putchar(k);
+					putchar(m);
+					if (i < 57 || j < 56 || k < 57 || m < 57)
+					{
+						putchar(44);
+						putchar(32);
+					}
+					m++;
+				}
+				m = 48;
+				k++;
 			}
+			j++;
 		}
+		i++;
 	}
-	putchar('\n');
+	putchar(10);
 	return (0);
 }

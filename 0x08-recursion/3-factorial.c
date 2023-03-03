@@ -1,19 +1,21 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * factorial - find the factorial of a given number
- * @n: an argument passed to the function
- *
- * Return: the factorial of a given number, -1 if lower than 0
+ * factorial - compute the factorial of a given number.
+ * @n: the number
+ * Return: factorial number
  */
 int factorial(int n)
 {
+	int fac = 1;
+
 	if (n < 0)
-	{
 		return (-1);
-	}
-	else if (n < 1)
-	{
+
+	else if (!n)
 		return (1);
-	}
-	return (n * factorial(n - 1));
+
+	fac = factorial(n - 1);
+
+	return (fac * n);
 }
